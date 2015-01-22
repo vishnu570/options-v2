@@ -1,7 +1,14 @@
 <ion-view>
+    <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
   <ion-content class="has-header">
-    <h1>Stores</h1>
-
-    <a href="#/app/stores/21" class="button button-positive">Go To Store</a>
+    <!--<h1>Stores</h1>
+    <a href="#/app/stores/21" class="button button-positive">Go To Store</a>-->
+    <ion-list>
+      <ion-item ng-repeat="store in stores" href="#/app/stores/{{store.id}}">
+        {{store.title}}
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>

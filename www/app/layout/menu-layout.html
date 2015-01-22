@@ -2,8 +2,7 @@
 
   <ion-pane ion-side-menu-content>
     <ion-nav-bar class="bar-balanced">
-      <ion-nav-back-button class="button-clear icon ion-ios7-arrow-back"></ion-nav-back-button>
-      <button menu-toggle="left" class="button button-icon icon"></button>
+      <ion-nav-back-button class="button-clear"><i class="icon ion-chevron-left"></i> Back</ion-nav-back-button>
     </ion-nav-bar>
     <ion-nav-view name="mainContent" animation="slide-left-right"></ion-nav-view>
   </ion-pane>
@@ -14,7 +13,6 @@
     </header>
     <ion-content class="has-header">
       <ion-list>
-        <ion-item nav-clear menu-close ui-sref="home.stores">Home</ion-item>
         <ion-item nav-clear menu-close ui-sref="app.stores">Stores</ion-item>
         <ion-item nav-clear menu-close ui-sref="app.favorites">Favorites</ion-item>
         <ion-item nav-clear menu-close ui-sref="app.settings">Settings</ion-item>

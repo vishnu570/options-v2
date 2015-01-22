@@ -1,12 +1,12 @@
-angular.module("zoopApp", ["ionic"])
+angular.module("zoopApp", ["ionic", "zoopApp.controllers"])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
+ //   if(window.cordova && window.cordova.plugins.Keyboard) {
+ //     cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+ //   }
     if(window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
@@ -17,30 +17,25 @@ angular.module("zoopApp", ["ionic"])
 .config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
-
-    .state('home', {
-//       abstract: true,
-      url: "/home",
-      templateUrl: "app/home/home.html"
-    })
-
-     
+  
    .state('app', {
       abstract: true,
       url: "/app",
-      templateUrl: "app/layout/menu-layout.html"
+      templateUrl: "app/layout/menu-layout.html",
+      controller: 'AppCtrl'
     })
-  
+
    .state('app.stores', {
       url: "/stores",
       views: {
         "mainContent": {
-          templateUrl: "app/stores/stores.html"
+          templateUrl: "app/stores/stores.html",
+          controller: 'StoreCtrl'
         }
       }
     })
-  
-   .state('app.favorites', {
+
+  .state('app.favorites', {
       url: "/favorites",
       views: {
         'mainContent': {
@@ -57,12 +52,13 @@ angular.module("zoopApp", ["ionic"])
         }
       }
     })
-
+  
     .state('app.store-detail', {
       url: "/stores/:id",
       views: {
         'mainContent': {
-          templateUrl: "app/stores/store-detail.html"
+          templateUrl: "app/stores/store-detail.html",
+          controller: 'StoreCtrl'
         }
       }
     });
