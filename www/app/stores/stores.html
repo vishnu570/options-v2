@@ -1,13 +1,30 @@
-<ion-view title="Stores">
-    <ion-nav-buttons side="left">
+<!-- <ion-view title="Stores">
+  <ion-nav-buttons side="left">
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
   <ion-content class="has-header">
-    <!--<h1>Stores</h1>
-    <a href="#/app/stores/21" class="button button-positive">Go To Store</a>-->
     <ion-list>
-      <ion-item ng-repeat="store in stores" href="#/app/stores/{{store.id}}">
-        {{store.title}}
+      <ion-item ng-repeat="store in storeslist" href="#/app/stores/{{store.id}}">
+        {{store.name}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view> -->
+
+<ion-view view-title="Stores">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header">
+    <ion-list ng-show="stores">
+      <ion-item class="item-icon-left" ng-repeat="store in stores" type="item-text-wrap" ng-click="showStoreDetails(store.$id)">
+        <i class="icon ion-cash"></i>
+        <h2>{{store.name}}</h2>
+      </ion-item>
+    </ion-list>
+    <ion-list ng-hide="stores.length">
+      <ion-item class="textCenter">
+        <i class="icon ion-loading-c"></i> Loading Stores
       </ion-item>
     </ion-list>
   </ion-content>

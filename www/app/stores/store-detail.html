@@ -1,5 +1,21 @@
-<ion-view title="Details">
+<ion-view title="{{ storeName }} Store">
+<!--   <ion-content class="has-header">
+    <h1>Store Name: {{ storeName }}</h1>
+  </ion-content> -->
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
   <ion-content class="has-header">
-    <h1>Store Detail</h1>
+    <ion-list ng-show="items">
+      <ion-item class="item-icon-left" ng-repeat="item in items" type="item-text-wrap">
+        <i class="icon ion-ios-pricetag"></i>
+        <h2>{{item.name}}</h2>
+      </ion-item>
+    </ion-list>
+    <ion-list ng-hide="items.length">
+      <ion-item class="textCenter">
+        <i class="icon ion-loading-c"></i> Loading Items for {{ storeName }}
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>
