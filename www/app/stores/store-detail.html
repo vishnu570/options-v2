@@ -1,11 +1,8 @@
-<ion-view title="{{ storeName }} Store">
-<!--   <ion-content class="has-header">
-    <h1>Store Name: {{ storeName }}</h1>
-  </ion-content> -->
+<ion-view title="{{ storeName }} Store" noscroll>
   <ion-nav-buttons side="left">
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
-  <ion-content class="has-header">
+<!--   <ion-content class="has-header">
     <ion-list ng-show="items">
       <ion-item class="item-icon-left" ng-repeat="item in items" type="item-text-wrap">
         <i class="icon ion-ios-pricetag"></i>
@@ -17,5 +14,31 @@
         <i class="icon ion-loading-c"></i> Loading Items for {{ storeName }}
       </ion-item>
     </ion-list>
-  </ion-content>
+  </ion-content> -->
+
+  <ion-pane class="has-header">
+    <!-- <ion-header-bar class="bar-transparent">
+        <h1 class="title">Help Out</h1>
+      </ion-header-bar>
+ -->
+    <swipe-cards>
+      <!-- <swipe-card on-card-swipe="cardSwiped()" id="start-card">
+        Swipe down for a new card
+      </swipe-card> -->
+      <swipe-card ng-repeat="item in items" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
+        <div ng-controller="CardCtrl">
+          <div class="title">
+            {{item.name}}
+          </div>
+          <div class="image">
+            <img ng-src="{{item.image}}">
+          </div>
+          <div class="button-bar">
+            <button class="button button-clear button-positive" ng-click="goAway()">Fav</button>
+            <button class="button button-clear button-positive" ng-click="goAway()">Wishlist</button>
+          </div>
+        </div>
+      </swipe-card>
+    </swipe-cards>
+  </ion-pane>
 </ion-view>

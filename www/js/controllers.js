@@ -1,17 +1,11 @@
 angular.module('zoopApp.controllers', [])
 
-// .controller('StoreCtrl', function($scope) {
-  
-//   console.log("in Store Controller");
-//   $scope.storeslist = [
-//     { name: 'Store1', id: 1 },
-//     { name: 'Store2', id: 2 },
-//     { name: 'Store3', id: 3 },
-//     { name: 'Store4', id: 4 },
-//     { name: 'Store5', id: 5 },
-//     { name: 'Store6', id: 6 }
-//   ];
-// })
+.controller('CardCtrl', function($scope, $ionicSwipeCardDelegate) {
+  $scope.goAway = function() {
+    var card = $ionicSwipeCardDelegate.getSwipeableCard($scope);
+    card.swipe();
+  };
+})
 
 .controller('StoreCtrl', function ($scope, Stores, $state) {
     
@@ -26,7 +20,7 @@ angular.module('zoopApp.controllers', [])
     }
 })
 
-.controller('StoreItemsCtrl', function($scope, Items, $state) {
+.controller('StoreItemsCtrl', function($scope, Items, $state, $ionicSwipeCardDelegate) {
   
 //   console.log("StoreItems Controller initialized");
   Items.selectStore($state.params.storeId);
@@ -34,4 +28,20 @@ angular.module('zoopApp.controllers', [])
   $scope.storeName = storeName;
   $scope.items = Items.all();
   
+  // $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
+  console.log("Items : "+Items.all());
+
+  $scope.cardSwiped = function(index) {
+    $scope.addCard();
+  };
+
+  $scope.cardDestroyed = function(index) {
+    $scope.items.splice(index, 1);
+  };
+
+  $scope.addCard = function() {
+    var newCard = Items.all()[Math.floor(Math.random() * Items.all().length)];
+    newCard.id = Math.random();
+    $scope.items.push(angular.extend({}, newCard));
+  }  
 });

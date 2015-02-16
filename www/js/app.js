@@ -2,14 +2,7 @@
 
 var firebaseUrl = "https://sizzling-heat-2737.firebaseio.com";
 
-// function onDeviceReady() {
-//     angular.bootstrap(document, ["zoopApp"]);
-// }
-// //console.log("binding device ready");
-// // Registering onDeviceReady callback with deviceready event
-// document.addEventListener("deviceready", onDeviceReady, false);
-
-angular.module('zoopApp', ['ionic', 'zoopApp.controllers', 'zoopApp.services', 'firebase'])
+angular.module('zoopApp', ['ionic', 'zoopApp.controllers', 'zoopApp.services', 'firebase', 'ionic.contrib.ui.cards'])
 
 .run(function ($ionicPlatform, $rootScope, $ionicLoading) {
   
@@ -29,6 +22,19 @@ angular.module('zoopApp', ['ionic', 'zoopApp.controllers', 'zoopApp.services', '
     $rootScope.firebaseUrl = firebaseUrl;
           
   });
+})
+
+.directive('noScroll', function($document) {
+
+  return {
+    restrict: 'A',
+    link: function($scope, $element, $attr) {
+
+      $document.on('touchmove', function(e) {
+        e.preventDefault();
+      });
+    }
+  }
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
