@@ -28,7 +28,7 @@ angular.module('zoopApp.controllers', [])
   console.log("storeName : "+ $scope.storeName);
 
   $scope.items = Items.all();
-  console.log("Items : "+Items.all());
+  console.log("Items : "+Items.all().length);
 
   $scope.cardSwiped = function(index) {
     $scope.addCard();
