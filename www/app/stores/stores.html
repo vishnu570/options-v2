@@ -7,6 +7,7 @@
       <ion-item class="item-icon-left" ng-repeat="store in stores" type="item-text-wrap" ng-click="showStoreDetails(store.$id)">
         <i class="icon ion-cash"></i>
         <h2>{{store.name}}</h2>
+        <p>{{store.city}}</p>
       </ion-item>
     </ion-list>
     <ion-list ng-hide="stores.length">

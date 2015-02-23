@@ -28,10 +28,10 @@
       <swipe-card ng-repeat="item in items" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
         <div ng-controller="CardCtrl">
           <div class="title">
-            {{item.name}}
+            {{item.productName}}
           </div>
           <div class="image">
-            <img ng-src="{{item.image}}">
+            <img ng-src="{{item.productDiscountImage}}">
           </div>
           <div class="button-bar">
             <button class="button button-clear button-positive" ng-click="goAway()">Fav</button>

@@ -24,11 +24,10 @@ angular.module('zoopApp.controllers', [])
   
 //   console.log("StoreItems Controller initialized");
   Items.selectStore($state.params.storeId);
-  var storeName = Items.getSelectedStoreName();
-  $scope.storeName = storeName;
+  $scope.storeName = Items.getSelectedStoreName();
+  console.log("storeName : "+ $scope.storeName);
+
   $scope.items = Items.all();
-  
-  // $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
   console.log("Items : "+Items.all());
 
   $scope.cardSwiped = function(index) {

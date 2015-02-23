@@ -24,10 +24,14 @@ angular.module('zoopApp.services', ['firebase'])
     }
   }
 }).factory('Items', function($firebase, Stores) {
-  //   console.log("Items Factory initialized");
+    console.log("Items Factory initialized");
   var selectedStoreId;
   var ref = new Firebase(firebaseUrl);
-  var items;
+
+  var storesRef = ref.child('stores');
+  var productsRef =  ref.child('products');
+
+  var items = [];
   return {
     all: function() {
       return items;
@@ -42,8 +46,22 @@ angular.module('zoopApp.services', ['firebase'])
     },
     selectStore: function(storeId) {
       selectedStoreId = storeId;
-      if(!isNaN(storeId)) {
-        items = $firebase(ref.child('stores').child(selectedStoreId).child('items')).$asArray();
+      console.log("storeId : "+storeId+ "  cond : "+isNaN(storeId));
+
+      var productStoresRef = storesRef.child(selectedStoreId).child("products");
+      console.log("productStoresRef : "+$firebase(productStoresRef).$asObject().$id);
+
+      // if(!isNaN(storeId)) {
+      if (storeId) {
+        // items = $firebase(ref.child('stores').child(selectedStoreId).child('items')).$asArray();
+          console.log("inside if block");
+          productStoresRef.on("value", function(snap) {
+              console.log("snap.val : "+snap.val());
+              snap.forEach(function(data) {
+                console.log("The Key is : " + data.key());
+                items.push($firebase(productsRef.child(data.key())).$asObject());
+              });
+          });
       }
     }
   }
