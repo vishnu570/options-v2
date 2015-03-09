@@ -2,7 +2,7 @@
 
 var firebaseUrl = "https://sizzling-heat-2737.firebaseio.com";
 
-angular.module('zoopApp', ['ionic', 'zoopApp.controllers', 'zoopApp.services', 'firebase', 'ionic.contrib.ui.cards'])
+angular.module('zoopApp', ['ionic', 'zoopApp.controllers', 'zoopApp.services', 'firebase'])
 
 .run(function ($ionicPlatform, $rootScope, $ionicLoading) {
   
@@ -52,7 +52,8 @@ angular.module('zoopApp', ['ionic', 'zoopApp.controllers', 'zoopApp.services', '
       url: '/favorites',
       views: {
         'mainContent': {
-          templateUrl: 'app/favorites.html'
+          templateUrl: 'app/favorites.html',
+          controller: 'FavoritesCtrl'
         }
       }
     })
@@ -84,8 +85,18 @@ angular.module('zoopApp', ['ionic', 'zoopApp.controllers', 'zoopApp.services', '
           controller: 'StoreItemsCtrl'
         }
       }
+    })
+  
+    .state('app.login', {
+      url: '/login',
+      views: {
+         'mainContent': {
+           templateUrl: 'app/login.html',
+           controller: 'SignInCtrl'
+         }
+      }
     });
 
     // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/stores');
+  $urlRouterProvider.otherwise('/app/login');
 });

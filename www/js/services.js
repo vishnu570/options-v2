@@ -5,6 +5,7 @@
  * Time: 12:48 PM
  * To change this template use Tools | Templates.
  */
+var ref = new Firebase(firebaseUrl);
 angular.module('zoopApp.services', ['firebase'])
 /**
  * Simple Service which returns Stores collection as Array & binds to the Scope in Controller
@@ -12,7 +13,6 @@ angular.module('zoopApp.services', ['firebase'])
 .factory('Stores', function($firebase) {
   // console.log("Stores Factory initialized");
   // Might use a resource here that returns a JSON array
-  var ref = new Firebase(firebaseUrl);
   var stores = $firebase(ref.child('stores')).$asArray();
   return {
     all: function() {
@@ -24,17 +24,18 @@ angular.module('zoopApp.services', ['firebase'])
     }
   }
 }).factory('Items', function($firebase, Stores) {
-    // console.log("Items Factory initialized");
+  // console.log("Items Factory initialized");
   var selectedStoreId;
-  var ref = new Firebase(firebaseUrl);
-
   var storesRef = ref.child('stores');
-  var productsRef =  ref.child('products');
-
+  var productsRef = ref.child('products');
   var items;
+  var favList;
   return {
     all: function() {
       return items;
+    },
+    favList: function() {
+      return favList;
     },
     getSelectedStoreName: function() {
       var selectedStore;
@@ -48,17 +49,41 @@ angular.module('zoopApp.services', ['firebase'])
       selectedStoreId = storeId;
       items = [];
       var productStoresRef = storesRef.child(selectedStoreId).child("products");
-
       // if(!isNaN(storeId)) {
-      if (storeId) {
+      if(storeId) {
         // items = $firebase(ref.child('stores').child(selectedStoreId).child('items')).$asArray();
-          productStoresRef.on("value", function(snap) {
-              snap.forEach(function(data) {
-                console.log("The Key is : " + data.key());
-                items.push($firebase(productsRef.child(data.key())).$asObject());
-              });
+        productStoresRef.on("value", function(snap) {
+          snap.forEach(function(data) {
+            //                 console.log("The Key is : " + data.key());
+            items.push($firebase(productsRef.child(data.key())).$asObject());
           });
+        });
       }
+    },
+    getFavorites: function() {
+      favList = [];
+      var authData = ref.getAuth();
+      var favoritesRef = ref.child('users').child(authData.uid).child('favorites');
+      if(authData.uid) {
+        favoritesRef.on("value", function(snap) {
+          snap.forEach(function(data) {
+            console.log("The Key is : " + data.key());
+            favList.push($firebase(productsRef.child(data.key())).$asObject());
+          });
+        });
+      }
+    },
+    addFavorite: function(itemId) {
+      var authData = ref.getAuth();
+      var favoritesRef = ref.child('users').child(authData.uid).child('favorites');
+      favoritesRef.child(itemId).set(true);
+      console.log("added to favorites : " + authData.uid + " , " + itemId);
+    },
+    removeFavorite: function(itemId) {
+      var authData = ref.getAuth();
+      var favoritesRef = ref.child('users').child(authData.uid).child('favorites');
+      favoritesRef.child(itemId).remove();
+      console.log("removed from favorites : " + authData.uid + " , " + itemId);
     }
   }
 })

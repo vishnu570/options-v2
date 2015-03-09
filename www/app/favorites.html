@@ -1,8 +1,23 @@
-<ion-view title="Favorites">
+<ion-view title="{{ userName }} Favorites">
   <ion-nav-buttons side="left">
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
   <ion-content class="has-header">
-    <h1>Favorites from Side Menu</h1>
+    <input type="text" placeholder="Filter products..." ng-model="search.$" ng-change="scrollTop()">
+    <ion-list ng-show="favList">
+      <ion-item class="item-thumbnail-left" ng-repeat="item in favList | filter:search" type="item-text-wrap">
+<!--         <i class="icon ion-ios-pricetag"></i> -->
+        <img ng-src="{{item.productImage}}">
+        <h2>{{item.productName}}</h2>
+        <p style="color:green">{{item.sellingPrice}}</p>
+        <p style="color:red">{{item.originalPrice}}</p>
+        <ion-option-button class="button-icon icon ion-heart-broken" ng-click="removefavorites(item)"></ion-option-button>
+      </ion-item>
+    </ion-list>
+    <ion-list ng-hide="favList.length">
+      <ion-item class="textCenter">
+        <i class="icon ion-loading-c"></i> Loading Favorites of {{ userName }}
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>
