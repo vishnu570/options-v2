@@ -105,6 +105,41 @@ angular.module('zoopApp.controllers', [])
     //     alert('Item added to fav : ' + item.$id + " , "+ item.productName);
     Items.addFavorite(item.$id);
   };
+
+  // Slider code starts
+  $scope.slider = {};
+  $scope.slider.rangeValue = 0;
+
+  $scope.rangeFilter = function(number) {
+        return (number.value > $scope.slider.rangeValue);
+  }
+	
+	$scope.startSliderCalculation = function(event){
+		var x = event.clientX;
+    var y = event.clientY;
+	
+	  $scope.$watch('slider.rangeValue',function(val,old){
+	     $scope.rangeValue = parseInt(val);
+      //alert(val);
+    });
+    
+	  $scope.left = (x + 82) + "px";
+    $scope.hovered = true;
+		$scope.isMouseDown = true;
+  }
+  
+  $scope.calculateLeftPosition = function(event, isMouseDown){
+    if(isMouseDown == true)
+    {
+      var x = event.clientX;
+      $scope.left = (x + 82) + "px";
+    }
+  }
+  
+  $scope.mouseReleased = function()
+  {
+	  $scope.isMouseDown = false;
+  }  
   //   $scope.cardSwiped = function(index) {
   //     $scope.addCard();
   //   };

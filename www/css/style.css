@@ -119,3 +119,29 @@ swipe-card.pop-in-start {
 swipe-card.pop-in {
   -webkit-animation: bounceIn 0.4s ease-out;
 }
+
+.sliderRange {
+    -webkit-appearance: none;
+    position: relative;
+    
+    z-index: 1;
+    width: 11px;
+    height: 11px; 
+    -webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
+    border-radius: 40px;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ebf1f6), 
+      color-stop(50%,#abd3ee), color-stop(51%,#89c3eb), color-stop(100%,#d5ebfb));
+}
+
+.popover {
+    background: blue;
+    width: 20px;    
+    background: lightblue;
+    position: absolute;
+    padding: 0 2px;
+	opacity: 1;	
+	top:-4%;
+	height:15px;
+	font-size:10px;
+}
