@@ -7,7 +7,7 @@
 <!--     <button ng-if="search.length" class="button button-icon ion-android-close input-button" ng-click="clearSearch()">
     </button> -->
     <ion-list ng-show="items">
-      <ion-item class="item-thumbnail-left" ng-repeat="item in items | filter:search" type="item-text-wrap">
+      <ion-item class="item-thumbnail-left" ng-repeat="item in items | filter:search | filter:rangeFilter" type="item-text-wrap">
 <!--         <i class="icon ion-ios-pricetag"></i> -->
         <img ng-src="{{item.productImage}}">
         <h2>{{item.productName}}</h2>
@@ -22,10 +22,10 @@
       </ion-item>
     </ion-list>
     <div class="item range">
-      1
-      <div class="popover" ng-show="hovered" ng-style="{left:left}">{{rangeValue}}</div>
-          <input class="sliderRange" type="range" name="volume" min="1" max="100" value="{{rangeValue}}" 
-                 ng-model="rangeValue" ng-mouseDown="startSliderCalculation($event)" 
+      0
+      <div class="popover" ng-show="hovered" ng-style="{left:left}">{{slider.rangeValue}}</div>
+          <input class="sliderRange" type="range" name="volume" min="0" max="100" value="{{slider.rangeValue}}" 
+                 ng-model="slider.rangeValue" ng-mouseDown="startSliderCalculation($event)" 
                  ng-mouseMove="calculateLeftPosition($event, isMouseDown)"   ng-mouseUp="mouseReleased()">
           100
     </div>    

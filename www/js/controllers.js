@@ -110,8 +110,8 @@ angular.module('zoopApp.controllers', [])
   $scope.slider = {};
   $scope.slider.rangeValue = 0;
 
-  $scope.rangeFilter = function(number) {
-        return (number.value > $scope.slider.rangeValue);
+  $scope.rangeFilter = function(item) {
+        return (item.discount >= $scope.slider.rangeValue);
   }
 	
 	$scope.startSliderCalculation = function(event){
@@ -119,7 +119,7 @@ angular.module('zoopApp.controllers', [])
     var y = event.clientY;
 	
 	  $scope.$watch('slider.rangeValue',function(val,old){
-	     $scope.rangeValue = parseInt(val);
+	     $scope.slider.rangeValue = parseInt(val);
       //alert(val);
     });
     
