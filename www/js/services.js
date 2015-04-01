@@ -35,6 +35,7 @@ angular.module('zoopApp.services', ['firebase'])
       return items;
     },
     favList: function() {
+			console.log("favlist : "+favList);
       return favList;
     },
     getSelectedStoreName: function() {
@@ -65,7 +66,7 @@ angular.module('zoopApp.services', ['firebase'])
       var authData = ref.getAuth();
       var favoritesRef = ref.child('users').child(authData.uid).child('favorites');
       if(authData.uid) {
-        favoritesRef.on("value", function(snap) {
+        favoritesRef.once("value", function(snap) {
           snap.forEach(function(data) {
             console.log("The Key is : " + data.key());
             favList.push($firebase(productsRef.child(data.key())).$asObject());
@@ -78,6 +79,10 @@ angular.module('zoopApp.services', ['firebase'])
       var favoritesRef = ref.child('users').child(authData.uid).child('favorites');
       favoritesRef.child(itemId).set(true);
       console.log("added to favorites : " + authData.uid + " , " + itemId);
+			if(!favList) {
+				favList = [];
+			}
+			favList.push($firebase(productsRef.child(itemId)).$asObject());
     },
     removeFavorite: function(itemId) {
       var authData = ref.getAuth();

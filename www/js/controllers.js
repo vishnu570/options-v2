@@ -104,6 +104,7 @@ angular.module('zoopApp.controllers', [])
   $scope.addfavorites = function(item) {
     //     alert('Item added to fav : ' + item.$id + " , "+ item.productName);
     Items.addFavorite(item.$id);
+// 		$state.go('app.favorites');
   };
 
   // Slider code starts
@@ -152,12 +153,14 @@ angular.module('zoopApp.controllers', [])
   //     $scope.items.push(angular.extend({}, newCard));
   //   }  
 }).controller('FavoritesCtrl', function($scope, Items, $state) {
-    
-  Items.getFavorites();
+   
+	console.log("FavoritesCtrl Controller initialized");
+	Items.getFavorites();
   $scope.favList = Items.favList();
   
-  $scope.removefavorites = function(item) {
+  $scope.removefavorites = function(item, index) {
     //     alert('Item added to fav : ' + item.$id + " , "+ item.productName);
     Items.removeFavorite(item.$id);
+		$scope.favList.splice(index, 1);
   };
 });

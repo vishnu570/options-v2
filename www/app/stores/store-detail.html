@@ -4,16 +4,15 @@
   </ion-nav-buttons>
   <ion-content class="has-header">
     <input type="text" placeholder="Filter products..." ng-model="search.$" ng-change="scrollTop()">
-<!--     <button ng-if="search.length" class="button button-icon ion-android-close input-button" ng-click="clearSearch()">
-    </button> -->
+    <button ng-if="search.length" class="button button-icon ion-android-close input-button" ng-click="clearSearch()">
+    </button>
     <ion-list ng-show="items">
-      <ion-item class="item-thumbnail-left" ng-repeat="item in items | filter:search | filter:rangeFilter" type="item-text-wrap">
-<!--         <i class="icon ion-ios-pricetag"></i> -->
+      <ion-item class="item item-thumbnail-left item-icon-right" ng-repeat="item in items | filter:search | filter:rangeFilter">
         <img ng-src="{{item.productImage}}">
         <h2>{{item.productName}}</h2>
         <p style="color:green">{{item.sellingPrice}}</p>
-        <p style="color:red">{{item.originalPrice}}</p>
-        <ion-option-button class="button-icon icon ion-heart" ng-click="addfavorites(item)"></ion-option-button>
+				<p style="color:red">{{item.discount}} %</p>
+        <i class="icon ion-heart assertive" ng-click="addfavorites(item)"></i>
       </ion-item>
     </ion-list>
     <ion-list ng-hide="items.length">
@@ -30,30 +29,4 @@
           100
     </div>    
   </ion-content>
-
-<!--   <ion-pane class="has-header">
-    <!-- <ion-header-bar class="bar-transparent">
-        <h1 class="title">Help Out</h1>
-      </ion-header-bar>
-
-    <swipe-cards>
-      <!-- <swipe-card on-card-swipe="cardSwiped()" id="start-card">
-        Swipe down for a new card
-      </swipe-card> 
-      <swipe-card ng-repeat="item in items" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
-        <div ng-controller="CardCtrl">
-          <div class="title">
-            {{item.productName}}
-          </div>
-          <div class="image">
-            <img ng-src="{{item.productImage}}">
-          </div>
-          <div class="button-bar">
-            <button class="button button-clear button-positive" ng-click="goAway()">Fav</button>
-            <button class="button button-clear button-positive" ng-click="goAway()">Wishlist</button>
-          </div>
-        </div>
-      </swipe-card>
-    </swipe-cards>
-  </ion-pane> -->
 </ion-view>
