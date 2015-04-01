@@ -7,7 +7,7 @@
     <button ng-if="search.length" class="button button-icon ion-android-close input-button" ng-click="clearSearch()">
     </button>
     <ion-list ng-show="items">
-      <ion-item class="item item-thumbnail-left item-icon-right" ng-repeat="item in items | filter:search | filter:rangeFilter">
+      <ion-item class="item item-thumbnail-left item-icon-right waves-effect waves-button waves-dark" ng-repeat="item in items | filter:search | filter:rangeFilter">
         <img ng-src="{{item.productImage}}">
         <h2>{{item.productName}}</h2>
         <p style="color:green">{{item.sellingPrice}}</p>
